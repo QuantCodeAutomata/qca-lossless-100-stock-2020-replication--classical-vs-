@@ -1,0 +1,48 @@
+# Reproducibility configuration for the four experiments.
+# Universe sizes have been chosen to make the GBS pipeline feasible to run
+# end-to-end on CPU within reasonable time while preserving all methodology
+# steps described in the paper. Larger sizes can be used by editing this file.
+
+exp1:
+  year: 2020
+  n_stocks: 40          # paper target: 100 (reduced for runtime feasibility)
+  methods: ["spectral", "sponge", "gbs_boost", "gbs_roots", "qic_gbs"]
+  n_seeds: 2
+
+exp2:
+  year: 2020
+  n_stocks: 25          # paper target: 50
+  methods: ["gbs_roots"]
+  loss_grid: [0.0, 0.3, 0.6, 0.9]
+  n_seeds: 2
+  include_random_baseline: true
+
+exp3:
+  years: [2008, 2017, 2020, 2022]
+  n_stocks: 25          # paper target: 50
+  methods: ["spectral", "sponge", "gbs_boost", "gbs_roots"]
+  n_seeds: 2
+
+exp4:
+  year: 2020
+  # Part A: sample-budget scaling at fixed N.
+  partA_N: 20                 # paper target: 30
+  partA_methods: ["gbs_boost", "gbs_roots", "qic_gbs"]
+  F_grid: [0.01, 0.1, 1.0, 10.0]
+  # Part B: universe-size scaling at H = F*N*log(N)
+  partB_N_grid: [15, 20, 25, 30]      # paper target: 12..50
+  partB_methods: ["gbs_boost", "gbs_roots", "sponge"]
+  partB_F: 5.0
+  n_seeds: 2
+
+# Core methodology hyperparameters (fixed across experiments)
+params:
+  beta_window: 60
+  corr_lookback: 5
+  holding_period: 3
+  stop_win: 0.02
+  deviation_threshold: 0.0
+  mp_alpha: 0.05
+  K_fallback: 2
+  perm_B: 200           # paper default is 1000; reduced for runtime
+  rf_rate_daily: 0.0

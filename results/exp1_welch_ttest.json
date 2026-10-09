@@ -1,0 +1,10 @@
+{
+  "TR_gbs_roots_vs_sponge": {
+    "t_stat": -20.541345384685965,
+    "p_value": 0.007644373888128307
+  },
+  "Sharpe_gbs_roots_vs_sponge": {
+    "t_stat": -12.024985524509168,
+    "p_value": 0.016484679557549304
+  }
+}
